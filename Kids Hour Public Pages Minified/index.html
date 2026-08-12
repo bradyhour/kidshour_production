@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+    <title>Kit Clash Arena</title>
+    <link rel="stylesheet" href="styles.css?v=20">
+    <link rel="stylesheet" href="touch-controls.css?v=1">
+    <link rel="stylesheet" href="account.css?v=1">
+  </head>
+  <body>
+    <div id="pixelBackdrop" class="pixel-backdrop" aria-hidden="true"></div>
+    <button id="homeNav" class="nav-home" type="button">⌂ <span data-i18n="home">Home</span></button>
+    <main class="shell">
+      <section id="kidHourScreen" class="menu-screen" aria-label="Kids Hour home">
+        <div class="menu-card kid-hour-card">
+          <span class="menu-kicker">WELCOME TO</span>
+          <h1>Kids Hour</h1>
+          <p>Choose your adventure.</p>
+          <p id="dailyLearningStatus" class="daily-learning-status">Loading today’s learning goal…</p>
+          <div class="kid-hour-grid">
+            <a class="menu-choice kid-learning-choice" href="learning.html"><strong>📚 Learning Lab</strong><span>Finish today’s ten-question learning goal</span></a>
+            <button id="enterKitClash" class="menu-choice kid-kit-choice" type="button"><strong>⚔ Kit Clash Arena</strong><span>Battle with kits in 2D, 3D, and story modes</span></button>
+            <a id="enterUncertain" class="menu-choice kid-adventure-choice" href="text-adventure.html"><strong>🧭 Uncertain Adventures</strong><span>Survive</span></a>
+            <button id="enterEditor" class="menu-choice test-choice hidden" type="button"><strong>🛠 Creator Tools</strong><span>Editor, test arenas, maps, and character tools</span></button>
+            <a id="enterModeration" class="menu-choice moderation-choice hidden" href="moderation.html"><strong>🛡 Moderation</strong><span>Accounts, learning history, warnings, and bans</span></a>
+          </div>
+          <div class="kid-hour-community">
+            <section class="kid-rules" aria-labelledby="kidRulesTitle">
+              <span class="menu-kicker">PLAY FAIR</span>
+              <h2 id="kidRulesTitle">Rules</h2>
+              <ul>
+                <li><strong>No cheating.</strong> Cheating only hurts yourself. Do your own work and play fairly.</li>
+                <li>Be kind to other players.</li>
+                <li>Keep usernames and feedback appropriate.</li>
+                <li>Learn first, then enjoy the games you unlock.</li>
+              </ul>
+            </section>
+            <section class="kid-feedback" aria-labelledby="feedbackTitle">
+              <span class="menu-kicker">WORK IN PROGRESS!</span>
+              <h2 id="feedbackTitle">Please give suggestions</h2>
+              <p>Found a glitch or have an idea that would make Kids Hour better?</p>
+              <form id="feedbackForm">
+                <label for="feedbackText">Feedback or suggestion</label>
+                <textarea id="feedbackText" maxlength="500" required placeholder="Tell us what happened or what you would add…"></textarea>
+                <div class="feedback-actions"><small id="feedbackCount">0 / 500</small><button type="submit">Send feedback</button></div>
+                <p id="feedbackStatus" class="feedback-status" role="status"></p>
+              </form>
+            </section>
+          </div>
+          <dialog id="rulesAgreement" class="rules-agreement" aria-labelledby="rulesAgreementTitle">
+            <div class="rules-agreement-card">
+              <span class="menu-kicker">BEFORE YOU START</span>
+              <h2 id="rulesAgreementTitle">Kids Hour Rules</h2>
+              <ul>
+                <li><strong>No cheating.</strong> Cheating only hurts yourself.</li>
+                <li>Be kind and play fairly.</li>
+                <li>Keep usernames and feedback appropriate.</li>
+                <li>Do your own learning before playing.</li>
+              </ul>
+              <button id="agreeRules" type="button">I agree</button>
+            </div>
+          </dialog>
+        </div>
+      </section>
+
+      <section id="homeScreen" class="menu-screen hidden" aria-label="Kit Clash home">
+        <div class="menu-card">
+          <span class="menu-kicker" data-i18n="welcomeTo">Welcome to</span>
+          <h1>Kit Clash Arena</h1>
+          <p data-i18n="homeTagline">Battle, create, and explore your fighters.</p>
+          <label class="language-picker">
+            <span data-i18n="language">Language</span>
+            <select id="languageSelect">
+              <option value="en" data-i18n="englishLanguage">English</option>
+              <option value="zh" data-i18n="chineseLanguage">中文</option>
+            </select>
+          </label>
+          <div class="home-grid">
+            <button id="homePlay" class="menu-choice play-choice" type="button"><strong data-i18n="play">Play</strong><span data-i18n="playDescription">One player, two player, or play others</span></button>
+            <button id="homeRules" class="menu-choice rules-choice" type="button"><strong data-i18n="rulesTitle">Rules</strong><span data-i18n="rulesDescription">Learn the controls and how battles work</span></button>
+            <button id="homeKitGuide" class="menu-choice guide-choice" type="button"><strong data-i18n="kitGuideTitle">Kit Guide</strong><span data-i18n="kitGuideDescription">View detailed information about every kit</span></button>
+            <button id="homePerkGuide" class="menu-choice perk-choice" type="button"><strong data-i18n="perkGuideTitle">Perks</strong><span data-i18n="perkGuideDescription">View every perk and what it does</span></button>
+          </div>
+        </div>
+      </section>
+
+      <section id="editorScreen" class="menu-screen hidden" aria-label="Editor tools">
+        <button id="editorBack" class="menu-back" type="button">← <span data-i18n="back">Back</span></button>
+        <div class="menu-card editor-card">
+          <span class="menu-kicker">Kit Clash Arena</span>
+          <h1 data-i18n="editorTitle">Editor</h1>
+          <p data-i18n="editorDescription">Create, inspect, and test game content.</p>
+          <div class="home-grid">
+            <a class="menu-choice draw-choice" href="drawing-studio.html?v=4"><strong data-i18n="drawCharacters">Draw Characters</strong><span data-i18n="drawDescription">Create your own costume designs</span></a>
+            <a class="menu-choice view-choice" href="ai-costume-studio.html"><strong data-i18n="aiCostumeStudio">AI Costume Studio</strong><span data-i18n="aiStudioDescription">Describe, sketch, and animate a costume</span></a>
+            <a class="menu-choice view-choice" href="view-character.html"><strong data-i18n="viewCharacters">View Characters</strong><span data-i18n="viewDescription">See characters and costume ideas</span></a>
+            <button id="homeTestArena" class="menu-choice test-choice" type="button"><strong data-i18n="testArenaMode">Test Arena</strong><span data-i18n="testDescription">Try characters and pick any map</span></button>
+            <a class="menu-choice test-choice" href="mode-3d.html?test=1"><strong>3D Test Mode</strong><span>Polish movement, buildings, rooftops, fog, and weapons</span></a>
+          </div>
+        </div>
+      </section>
+
+      <section id="rulesScreen" class="menu-screen hidden" aria-label="Game rules">
+        <button id="rulesBack" class="menu-back" type="button">← <span data-i18n="back">Back</span></button>
+        <div class="menu-card rules-card">
+          <span class="menu-kicker">Kit Clash Arena</span>
+          <h1 data-i18n="rulesTitle">Rules</h1>
+          <div class="rules-list">
+            <article><strong data-i18n="rulesGoalTitle">Goal</strong><p data-i18n="rulesGoal">Deal 100 damage before your opponent. The winner earns 50 coins.</p></article>
+            <article><strong data-i18n="rulesControlsTitle">Controls</strong><p data-i18n="rulesControls">Player 1 uses A/D to move, W to jump, and S to shoot. Player 2 uses the arrow keys.</p></article>
+            <article><strong data-i18n="rulesLoadoutTitle">Choosing a Loadout</strong><p data-i18n="rulesLoadout">Before a match, W or Up switches between weapon and perk selection. Press Shoot when ready.</p></article>
+            <article><strong data-i18n="rulesShopTitle">Packs and Coins</strong><p data-i18n="rulesShop">Buy packs to unlock weapons, then perks, then Mega upgrades. Triple and Lucky packs provide special purchase options.</p></article>
+            <article><strong data-i18n="rulesCombatTitle">Combat</strong><p data-i18n="rulesCombat">Every hit causes knockback. Faster projectiles push harder, while bombs use a fixed explosion knockback.</p></article>
+            <article><strong data-i18n="rulesMegaTitle">Mega Forms</strong><p data-i18n="rulesMega">Mega upgrades cost more and improve a character's powers. Gold outlining shows that Mega is active.</p></article>
+            <article><strong data-i18n="rulesModesTitle">Modes and Arenas</strong><p data-i18n="rulesModes">Fight a friend or an Easy, Medium, or Hard bot. Maps contain platforms and hazards. Test Arena lets both players freely change weapons, perks, Mega forms, and maps without losing health.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section id="kitGuideScreen" class="menu-screen hidden" aria-label="Kit descriptions">
+        <button id="kitGuideBack" class="menu-back" type="button">← <span data-i18n="back">Back</span></button>
+        <div class="menu-card kit-guide-card">
+          <span class="menu-kicker">Kit Clash Arena</span>
+          <h1 data-i18n="kitGuideTitle">Kit Guide</h1>
+          <p data-i18n="kitGuideIntro">Choose a kit to see how its normal and Mega forms work.</p>
+          <label class="kit-guide-picker"><span data-i18n="chooseKit">Choose Kit</span><select id="kitGuideSelect"></select></label>
+          <article class="kit-guide-details">
+            <div class="kit-guide-heading"><strong id="kitGuideName">Kit</strong><span id="kitGuideRarity">Rarity</span></div>
+            <section><h2 data-i18n="normalForm">Normal Form</h2><p id="kitGuideNormal"></p></section>
+            <section><h2 data-i18n="megaForm">Mega Form</h2><p id="kitGuideMega"></p></section>
+          </article>
+        </div>
+      </section>
+
+      <section id="perkGuideScreen" class="menu-screen hidden" aria-label="Perk descriptions">
+        <button id="perkGuideBack" class="menu-back" type="button">← <span data-i18n="back">Back</span></button>
+        <div class="menu-card kit-guide-card">
+          <span class="menu-kicker">Kit Clash Arena</span>
+          <h1 data-i18n="perkGuideTitle">Perks</h1>
+          <p data-i18n="perkGuideIntro">Choose a perk to see exactly what it does.</p>
+          <label class="kit-guide-picker"><span data-i18n="choosePerk">Choose Perk</span><select id="perkGuideSelect"></select></label>
+          <article class="kit-guide-details">
+            <div class="kit-guide-heading"><strong id="perkGuideName">Perk</strong><span id="perkGuideRarity">Rarity</span></div>
+            <section><h2 data-i18n="perkEffect">Effect</h2><p id="perkGuideDescription"></p></section>
+          </article>
+        </div>
+      </section>
+
+      <section id="playScreen" class="menu-screen hidden" aria-label="Choose how to play">
+        <button id="playBack" class="menu-back" type="button">← <span data-i18n="back">Back</span></button>
+        <div class="menu-card compact-card">
+          <span class="menu-kicker" data-i18n="chooseMode">Choose a mode</span>
+          <h1 data-i18n="play">Play</h1>
+          <div id="modeButtons" class="play-mode-grid" aria-label="Game mode">
+            <button id="mode2D" class="menu-choice" type="button"><strong data-i18n="twoDMode">2D Battle</strong><span data-i18n="twoDDescription">Classic arena battles</span></button>
+            <button id="mode3D" class="menu-choice mode-3d-choice" type="button"><strong>3D Battle</strong><span>Terrain survival with kit abilities</span></button>
+          </div>
+          <div id="twoDModeButtons" class="play-mode-grid hidden" aria-label="2D player mode">
+            <button id="twoDModeBack" class="menu-choice" type="button"><strong>← <span data-i18n="back">Back</span></strong><span data-i18n="chooseMode">Choose a mode</span></button>
+            <button id="modeOnePlayer" class="menu-choice" type="button"><strong data-i18n="onePlayerMode">One Player</strong><span data-i18n="onePlayerDescription">Fight against the computer</span></button>
+            <button id="modeTwoPlayer" class="menu-choice" type="button"><strong data-i18n="twoPlayerMode">Two Player</strong><span data-i18n="twoPlayerDescription">Battle a friend on one keyboard</span></button>
+            <a class="menu-choice" href="story-mode.html"><strong>Story Mode</strong><span>Battle through 10 levels, unlock kits, and defeat bosses</span></a>
+            <button id="modeOnline" class="menu-choice" type="button"><strong data-i18n="onlineMode">Play Others</strong><span data-i18n="comingSoon">Coming Soon!</span></button>
+          </div>
+          <div id="threeDModeButtons" class="play-mode-grid hidden" aria-label="3D player mode">
+            <button id="threeDModeBack" class="menu-choice" type="button"><strong>← <span data-i18n="back">Back</span></strong><span data-i18n="chooseMode">Choose a mode</span></button>
+            <a class="menu-choice mode-3d-choice" href="mode-3d.html"><strong data-i18n="onePlayerMode">One Player</strong><span>Fight nine computer-controlled kits</span></a>
+            <button id="mode3DOnline" class="menu-choice" type="button"><strong data-i18n="onlineMode">Play Others</strong><span data-i18n="comingSoon">Coming Soon!</span></button>
+          </div>
+        </div>
+      </section>
+
+      <section id="comingSoonScreen" class="menu-screen hidden" aria-label="Play Others coming soon">
+        <button id="comingSoonBack" class="menu-back" type="button">← <span data-i18n="back">Back</span></button>
+        <div class="menu-card compact-card coming-soon-card">
+          <span class="soon-icon">⚡</span>
+          <span class="menu-kicker" data-i18n="onlineMode">Play Others</span>
+          <h1 data-i18n="comingSoon">Coming Soon!</h1>
+          <p data-i18n="comingSoonDescription">Online battles are being built. Check back later.</p>
+        </div>
+      </section>
+
+      <section class="game-panel hidden" aria-label="Two player arena fighting game">
+        <button id="gameBack" class="game-back" type="button">← <span data-i18n="back">Back</span></button>
+        <div class="hud">
+          <article class="fighter-card p1">
+            <span class="tag" data-i18n="player1">Player 1</span>
+            <strong id="p1Status">Ready</strong>
+            <canvas id="p1Preview" class="player-preview" width="220" height="205" aria-label="Player 1 preview"></canvas>
+            <label><span data-i18n="weapon">Weapon</span>
+              <select id="p1Style"></select>
+            </label>
+            <label class="perk-row hidden" id="p1PerkRow"><span data-i18n="perk">Perk</span>
+              <select id="p1Perk"></select>
+            </label>
+            <button id="p1Pack" type="button">Buy Pack</button>
+            <button id="p1TriplePack" type="button">Buy 3 Pack</button>
+            <button id="p1LuckyPack" type="button">Lucky Pack</button>
+            <span data-i18n="p1Controls">A/D move · W jump · S shoot</span>
+          </article>
+          <div class="title-block">
+            <h1 data-i18n="gameName">Kit Clash Arena</h1>
+            <div class="control-buttons top-actions">
+              <button id="resetAll" type="button" data-i18n="resetAll">Reset All</button>
+              <button id="restart" type="button" data-i18n="restart">Restart</button>
+            </div>
+            <button id="modeTestArena" type="button" class="hidden" data-i18n="testArenaMode">Test Arena</button>
+            <div id="aiDifficulty" class="ai-difficulty hidden" aria-label="AI difficulty">
+              <span data-i18n="aiDifficulty">AI Difficulty</span>
+              <div class="difficulty-buttons">
+                <button type="button" data-difficulty="easy" data-i18n="aiEasy">Easy</button>
+                <button type="button" class="active" data-difficulty="medium" data-i18n="aiMedium">Medium</button>
+                <button type="button" data-difficulty="hard" data-i18n="aiHard">Hard</button>
+              </div>
+            </div>
+          </div>
+          <article class="fighter-card p2">
+            <span class="tag" data-i18n="player2">Player 2</span>
+            <strong id="p2Status">Ready</strong>
+            <canvas id="p2Preview" class="player-preview" width="220" height="205" aria-label="Player 2 preview"></canvas>
+            <label><span data-i18n="weapon">Weapon</span>
+              <select id="p2Style"></select>
+            </label>
+            <label class="perk-row hidden" id="p2PerkRow"><span data-i18n="perk">Perk</span>
+              <select id="p2Perk"></select>
+            </label>
+            <button id="p2Pack" type="button">Buy Pack</button>
+            <button id="p2TriplePack" type="button">Buy 3 Pack</button>
+            <button id="p2LuckyPack" type="button">Lucky Pack</button>
+            <span data-i18n="p2Controls">←/→ move · ↑ jump · ↓ shoot</span>
+          </article>
+        </div>
+
+        <div class="canvas-wrap">
+          <canvas id="game" width="1600" height="900" aria-label="Game arena"></canvas>
+          <label id="testArenaPicker" class="test-arena-picker hidden">
+            <span data-i18n="testArenaMap">Pick Arena</span>
+            <select id="testMapSelect"></select>
+          </label>
+          <div id="testSandboxControls" class="test-sandbox-controls hidden">
+            <div><strong data-i18n="player1">Player 1</strong><select id="testP1Weapon" aria-label="Player 1 weapon"></select><select id="testP1Perk" aria-label="Player 1 perk"></select><label><input id="testP1Mega" type="checkbox"> <span data-i18n="mega">Mega</span></label></div>
+            <div><strong data-i18n="player2">Player 2</strong><select id="testP2Weapon" aria-label="Player 2 weapon"></select><select id="testP2Perk" aria-label="Player 2 perk"></select><label><input id="testP2Mega" type="checkbox"> <span data-i18n="mega">Mega</span></label></div>
+          </div>
+          <div id="banner" class="banner hidden">
+            <strong id="bannerTitle" data-i18n="playerWins">Player wins</strong>
+            <span data-i18n="restartHint">Press Y or click Restart</span>
+          </div>
+        </div>
+
+        <div class="controls">
+          <p id="roundText">Open packs, pick a kit, and outplay your opponent.</p>
+        </div>
+        <section id="touch2d" class="touch-2d" aria-label="Touch battle controls">
+          <div class="touch-player touch-player-one"><strong>P1</strong><button data-code="KeyA" type="button">◀</button><button data-code="KeyD" type="button">▶</button><button data-code="KeyW" type="button">JUMP</button><button data-code="KeyS" type="button">FIRE</button></div>
+          <div class="touch-player touch-player-two"><strong>P2</strong><button data-code="ArrowLeft" type="button">◀</button><button data-code="ArrowRight" type="button">▶</button><button data-code="ArrowUp" type="button">JUMP</button><button data-code="ArrowDown" type="button">FIRE</button></div>
+        </section>
+
+        <div id="rewardReveal" class="reward-reveal hidden" aria-live="polite">
+          <div id="rewardConfetti" class="reward-confetti" aria-hidden="true"></div>
+          <div class="reward-card">
+            <span id="rewardOwner" class="reward-owner">Player 1</span>
+            <span id="rewardRarity" class="reward-rarity">Common</span>
+            <canvas id="rewardPicture" class="reward-picture" width="300" height="250" aria-label="Reward character picture"></canvas>
+            <strong id="rewardName">Reward</strong>
+            <p id="rewardDescription">Reward details</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+  <script src="account-client.js?v=3"></script>
+  <script src="game.js?v=84"></script>
+  </body>
+</html>
