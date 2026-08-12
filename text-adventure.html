@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Uncertain Adventures</title>
+  <link rel="stylesheet" href="text-adventure.css?v=1">
+  <link rel="stylesheet" href="account.css?v=1">
+  <style>.action-form{display:grid;gap:10px;margin-top:22px}.action-form label{color:#ffd166;font-weight:950}.action-form textarea{min-height:130px;padding:15px;border:1px solid #ffffff32;border-radius:13px;background:#07120f;color:#fff;font:inherit;resize:vertical}.action-form button{justify-self:start;padding:11px 22px;border:1px solid #ffffff35;border-radius:11px;background:#315d4f;color:#fff;font-weight:900}</style>
+</head>
+<body>
+  <header class="topbar"><a href="index.html">← Home</a><strong>Uncertain Adventures</strong><button id="newRun" type="button">New Adventure</button></header>
+  <main>
+    <section id="setup" class="card setup-card">
+      <p class="eyebrow">A DIFFERENT STORY EVERY TIME</p>
+      <h1>Think first. Then survive.</h1>
+      <p class="lead">Survive.</p>
+      <div class="scenario-grid" id="scenarioGrid">
+        <button data-mode="mixed"><b>🎲 Surprise Mix</b><span>Every topic in one unpredictable run</span></button>
+        <button data-mode="history"><b>🏺 History</b><span>Reason through real events and technology</span></button>
+        <button data-mode="terrain"><b>🧭 Terrain Survival</b><span>Desert, mountain, jungle, coast, and tundra</span></button>
+        <button data-mode="glitch"><b>⛏ Reality Glitch</b><span>Real life and game survival rules collide</span></button>
+        <button data-mode="escape"><b>🔐 Guarded Escape</b><span>Observe patrols, combine clues, and escape</span></button>
+      </div>
+      <p class="small">No answer is selected automatically. Read the evidence: the “obvious” game move may be wrong.</p>
+    </section>
+
+    <section id="game" class="game-layout hidden">
+      <aside class="card notebook">
+        <p class="eyebrow">FIELD NOTEBOOK</p>
+        <div class="meter"><span>Condition</span><b id="condition">100</b></div>
+        <div class="meter"><span>Time</span><b id="day">Day 1 · 8:00 AM</b></div>
+        <div class="meter"><span>Location</span><b id="location">Unknown</b></div>
+        <div class="meter"><span>Needs</span><b id="needs">Stable</b></div>
+        <section id="evidencePanel"><h2>Evidence</h2><ul id="evidence"></ul></section>
+        <h2>Inventory</h2><ul id="inventory"></ul>
+      </aside>
+      <section class="card story-card">
+        <div class="story-meta"><span id="category"></span><span id="progress"></span></div>
+        <h1 id="title"></h1>
+        <p id="story"></p>
+        <div id="clueBox" class="clue-box"></div>
+        <div id="choices" class="choices"></div>
+        <form id="actionForm" class="action-form hidden">
+          <label for="actionInput">What do you do?</label>
+          <textarea id="actionInput" maxlength="500" placeholder="Tell your character exactly what to do…"></textarea>
+          <button id="actionSubmit" type="submit">Try it</button>
+        </form>
+        <div id="resultBox" class="result-box hidden"><strong id="resultTitle"></strong><p id="resultText"></p><button id="continueButton" type="button">Continue →</button></div>
+      </section>
+    </section>
+
+    <section id="ending" class="card ending hidden">
+      <p class="eyebrow">TIMELINE ENDED</p><h1 id="endingTitle"></h1><p id="endingText"></p>
+      <div id="endingStats" class="ending-stats"></div>
+      <button id="playAgain" type="button">Generate Another Adventure</button><a href="index.html">Return Home</a>
+    </section>
+  </main>
+  <script src="account-client.js?v=3"></script>
+  <script src="text-adventure.js?v=3"></script>
+</body>
+</html>

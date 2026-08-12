@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+  <title>Kit Clash Arena — 3D Battle</title>
+  <link rel="stylesheet" href="mode-3d.css?v=2">
+  <link rel="stylesheet" href="mode-3d-hud.css?v=1">
+  <link rel="stylesheet" href="mode-3d-touch.css?v=1">
+  <style>.map-picker{display:flex;align-items:center;justify-content:center;gap:12px;margin:18px 0}.map-picker select{padding:10px 14px;border:2px solid #60a5fa66;border-radius:10px;background:#17243a;color:#fff;font-weight:800}#coinReadout{display:inline-block;padding:8px 13px;border-radius:10px;background:#d89b22;color:#171008;font-weight:950}#unlockMessage{min-height:24px;color:#ffd77a;font-weight:850}.kits button.locked{border-color:#d89b22;filter:saturate(.7)}#crosshair{width:28px;height:28px;border:3px solid #fff;border-radius:50%;font-size:0;filter:drop-shadow(0 1px 2px #000)}#crosshair:before,#crosshair:after{content:"";position:absolute;left:50%;top:50%;background:#fff;transform:translate(-50%,-50%)}#crosshair:before{width:38px;height:3px}#crosshair:after{width:3px;height:38px}#peopleLeft{position:absolute;left:18px;top:108px;padding:8px 12px;border-radius:10px;background:#07111dcc;color:#fff;font-weight:950}#utilityReadout{position:absolute;right:18px;bottom:106px;padding:9px 13px;border-radius:10px;background:#0b1728cc;font-weight:850}#scope .drop-dashes{position:absolute;left:50%;top:18%;width:42px;height:64%;transform:translateX(-50%);background:repeating-linear-gradient(to bottom,transparent 0 27px,#111 27px 30px,transparent 30px 56px)}</style>
+  <style>#routeReadout{position:absolute;left:50%;bottom:92px;transform:translateX(-50%);padding:9px 14px;border-radius:10px;background:#07111ddd;color:#bff4ff;font-weight:950;letter-spacing:.04em;text-align:center;pointer-events:none}#routeReadout:empty{display:none}#paperMap{position:absolute;inset:11% 15%;z-index:12;background:#e7d7ae;color:#302819;border:10px double #6f5a36;box-shadow:0 18px 70px #000b;padding:24px;transform:rotate(-.35deg);overflow:auto}#paperMap.hidden{display:none}#paperMap h2{text-align:center;margin:0 0 8px;font:950 28px Georgia,serif}#paperMap p{text-align:center;margin:0 0 14px;font:700 14px Georgia,serif}#paperMap canvas{display:block;width:100%;height:calc(100% - 70px);min-height:340px}</style>
+</head>
+<body>
+  <canvas id="arena3d"></canvas>
+  <header class="topbar">
+    <a href="index.html">← Back</a>
+    <strong>Kit Clash Arena — 3D Battle</strong>
+    <div><button id="pauseButton" class="hidden" type="button">Pause</button> <button id="helpButton" type="button">Controls</button></div>
+  </header>
+  <section id="setup" class="panel setup">
+    <h1>Choose your 3D kit</h1>
+      <p>No perks or Mega forms. Be the last of 10 fighters standing.</p>
+    <div id="editorMapPicker" class="map-picker" hidden><label for="mapSelect"><b>Editor Test Map</b></label><select id="mapSelect"><option value="underwater">Underwater Ancient City</option><option value="park">National Park</option><option value="city">City Rooftops</option></select></div>
+    <div id="coinReadout">0 COINS</div><p id="unlockMessage">Kills earn 1 coin. Wins earn 5 coins.</p>
+    <div class="kits">
+      <button data-kit="sniper"><b>Sniper</b><span>Scope, long range, slower movement</span></button>
+      <button data-kit="grenade"><b>Grenade Launcher</b><span>Bouncing explosive grenades</span></button>
+      <button data-kit="machine"><b>Machine Gunner</b><span>Rapid fire and double bullets</span></button>
+      <button data-kit="bomb"><b>Bomb Dropper</b><span>Destroys and collects terrain blocks</span></button>
+      <button data-kit="swordsman"><b>Swordsman</b><span>Fast melee fighter with a bleeding strike</span></button>
+      <button data-kit="ninja"><b>Ninja</b><span>Silent energy balls, double jump, and invisibility</span></button>
+      <button data-kit="flamethrower"><b>Flamethrower</b><span>Burn enemies and temporarily blind them</span></button>
+      <button data-kit="boomerang"><b>Boomerang Thrower</b><span>Curving throws and knockout hits</span></button>
+      <button data-kit="ice"><b>Ice Mage</b><span>Slowing ice and bleeding crystal attacks</span></button>
+      <button data-kit="shield"><b>Shield Guardian</b><span>Forward shield and full protective barrier</span></button>
+      <button data-kit="harpoon"><b>Harpooner</b><span>Bleeding hits and uncontrollable movement</span></button>
+    </div>
+  </section>
+  <section id="hud" class="hud hidden">
+    <aside id="controlHint" aria-label="Game controls"><strong>CONTROLS</strong><span><b>WASD</b> move · <b>Shift</b> sprint · <b>Space</b> jump</span><span><b>Mouse</b> aim · <b>Click</b> fire · <b>F</b> board/exit subway · <b>M</b> map · <b>P</b> view · <b>H</b> hitboxes</span></aside>
+    <div class="bars">
+      <label>HEALTH <span id="healthText">100</span><i><em id="healthBar"></em></i></label>
+      <label>SPRINT <span id="staminaText">100</span><i><em id="staminaBar"></em></i></label>
+    </div>
+    <div id="kitReadout"></div>
+    <div id="peopleLeft">10 PEOPLE LEFT</div>
+    <div id="revealReadout" class="hidden"></div>
+    <div id="specialReadout">E: SPECIAL READY</div>
+    <div id="utilityReadout"></div>
+    <div id="blockReadout"></div>
+    <div id="routeReadout" aria-live="polite"></div>
+    <div id="crosshair">+</div>
+    <div id="scope" class="hidden"><div class="drop-dashes"></div></div>
+    <div id="message"></div>
+  </section>
+  <section id="paperMap" class="hidden" aria-label="Paper city map"><h2>CITY TRANSIT & ROOFTOP MAP</h2><p>Your location is marked in cyan. Enemy locations are never shown. Press M to fold.</p><canvas id="paperMapCanvas"></canvas></section>
+  <section id="controls" class="panel controls hidden">
+    <button id="closeControls" type="button">×</button>
+    <h2>Controls</h2>
+    <p><b>W A S D</b> move · <b>Shift</b> sprint · <b>Space</b> jump</p>
+    <p><b>Mouse</b> look · <b>Left click</b> fire · <b>E</b> special action · <b>Q</b> kit utility · <b>F</b> board or exit a stopped underground train · <b>M</b> paper city map · <b>P</b> change point of view. Surface express trains never stop and cannot be boarded.</p>
+    <p><b>Q:</b> Sniper toggles its marked scope. Bomb Dropper detonates placed bombs. Machine Gunner replaces its heating barrel.</p>
+    <p><b>Sniper:</b> hold Q to use the circular scope. Releasing Q immediately lowers it.</p>
+    <p><b>Bomb Dropper:</b> right click to place a collected block.</p>
+    <p>Click the battle to lock the mouse. Press Escape to release it.</p>
+  </section>
+  <section id="result" class="panel result hidden"><h1 id="resultTitle"></h1><p id="deathReport"></p><button id="again">Play Again</button><a href="index.html">Home</a></section>
+  <section id="touch3d" class="touch-3d" aria-label="Touch game controls">
+    <div id="movePad3d" class="touch-move-pad" aria-label="Movement pad"><span>MOVE</span></div>
+    <div id="lookZone3d" class="touch-look-zone" aria-label="Swipe to aim"></div>
+    <div class="touch-actions-3d">
+      <button data-touch-code="Space" type="button">JUMP</button>
+      <button data-touch-action="fire" type="button">FIRE</button>
+      <button data-touch-code="KeyE" type="button">SPECIAL</button>
+      <button data-touch-code="KeyQ" type="button">UTILITY</button>
+      <button data-touch-code="KeyF" type="button">USE</button>
+      <button data-touch-code="KeyM" type="button">MAP</button>
+    </div>
+  </section>
+<script src="mode-3d.js?v=74"></script>
+</body>
+</html>
